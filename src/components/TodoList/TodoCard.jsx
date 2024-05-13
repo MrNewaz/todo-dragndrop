@@ -19,11 +19,7 @@ const TodoCard = ({ task, handleDelete, setActiveCard }) => {
   })
   const handleChange = (e) => {
     const { name, value } = e.target
-
-    // Create a new state based on the previous state
     const updatedState = { ...selectedInput, [name]: value }
-
-    // Update the state
     setSelectedInput(updatedState)
 
     // Save the latest state to localStorage
@@ -63,19 +59,13 @@ const TodoCard = ({ task, handleDelete, setActiveCard }) => {
   }
 
   function daysRemaining(dateStr) {
-    // Parse the input date string to a Date object
     const targetDate = new Date(dateStr)
-    targetDate.setHours(0, 0, 0, 0) // Set time to midnight for accurate day comparison
-
-    // Get today's date and set time to midnight
+    targetDate.setHours(0, 0, 0, 0)
     const today = new Date()
     today.setHours(0, 0, 0, 0)
-
-    // Calculate the difference in milliseconds and convert to days
     const diff = targetDate - today
     const days = diff / (1000 * 60 * 60 * 24)
 
-    // Return the formatted message with the remaining days
     return days
   }
 
@@ -85,7 +75,7 @@ const TodoCard = ({ task, handleDelete, setActiveCard }) => {
     <>
       {isEditing.value & (isEditing.id === task.id) ? (
         <article
-          className="w-full h-full flex flex-col gap-2 min-h-[100px] p-3 border border-gray-300 rounded-lg shadow-sm"
+          className="w-full flex flex-col gap-2 min-h-[100px] p-3 border border-gray-300 rounded-lg shadow-sm"
           onDragStart={() => setActiveCard(task)}
           onDragEnd={() => setActiveCard(null)}
         >
@@ -93,7 +83,7 @@ const TodoCard = ({ task, handleDelete, setActiveCard }) => {
             type="text"
             name="task"
             value={selectedInput.task}
-            className="w-full flex-1 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"
+            className="w-full px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"
             placeholder="Enter your task"
             onChange={handleChange}
           />
@@ -101,30 +91,24 @@ const TodoCard = ({ task, handleDelete, setActiveCard }) => {
             type="text"
             name="description"
             value={selectedInput.description}
-            className="w-full flex-1 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"
+            className="w-full px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"
             placeholder="Enter description"
             onChange={handleChange}
           />
           <input
             type="date"
             name="deadline"
-            className="w-full flex-1 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"
+            className="w-full px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"
             value={selectedInput.deadline}
             onChange={handleChange}
           />
-          <div className="flex flex-col gap-2">
-            <div className="flex flex-row flex-wrap gap-1">
-              {task.tags.map((tag, index) => (
-                <Tag key={index} tagName={tag} selected />
-              ))}
-            </div>
-            <button
-              className="h-full bg-indigo-600 text-white rounded-lg px-3 py-2 font-bold"
-              onClick={updateTodo}
-            >
-              <p>update</p>
-            </button>
-          </div>
+
+          <button
+            className="h-full bg-indigo-600 text-white rounded-lg px-3 py-2 font-bold"
+            onClick={updateTodo}
+          >
+            <p>update</p>
+          </button>
         </article>
       ) : (
         <article
@@ -135,36 +119,37 @@ const TodoCard = ({ task, handleDelete, setActiveCard }) => {
         >
           <p className="font-bold">Title: {task.task}</p>
           <p className="text-sm text-slate-500">{task.description}</p>
-          <p className="task_text">Deadline: {task.deadline}</p>
-          <p className="task_text">Status: {task.status}</p>
-
           <div className="flex flex-col gap-2">
-            <div className="flex flex-row flex-wrap gap-1">
+            <div className="flex flex-row flex-wrap gap-1 mb-3">
               {task.tags.map((tag, index) => (
                 <Tag key={index} tagName={tag} />
               ))}
             </div>
           </div>
+          <div className="flex flex-row items-center justify-between w-full gap-2 border p-1 rounded-lg">
+            <p className="text-sm">Status: {task.status}</p>
+            <p className="text-sm text-red-600 ">Deadline: {task.deadline}</p>
+          </div>
 
-          <p>
+          <p className="w-full bg-indigo-100 p-1 rounded-lg text-center">
             {remainingDays > 0
               ? `${remainingDays} days remaining`
               : remainingDays === 0
               ? "Deadline ends today"
               : "Deadline has passed"}
           </p>
-          <div className="flex flex-row items-center justify-between my-2 border-t pt-2">
+          <div className="flex flex-row items-center justify-between gap-2 my-2 border-t pt-2">
             <button
-              className="h-full bg-indigo-600 text-white rounded-lg px-3 py-2 font-bold"
-              onClick={() => handleDelete(task.id)}
-            >
-              <p>Delete</p>
-            </button>
-            <button
-              className="h-full bg-indigo-600 text-white rounded-lg px-3 py-2 font-bold"
+              className="h-full flex-1 bg-indigo-600 text-white rounded-lg px-3 py-2 font-bold"
               onClick={handleEdit}
             >
               <p>Edit</p>
+            </button>
+            <button
+              className="h-full flex-1 bg-red-600 text-white rounded-lg px-3 py-2 font-bold"
+              onClick={() => handleDelete(task.id)}
+            >
+              <p>Delete</p>
             </button>
           </div>
         </article>

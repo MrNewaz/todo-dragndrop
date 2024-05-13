@@ -10,7 +10,7 @@ const TodoForm = ({ tags }) => {
   const [taskData, setTaskData] = useState({
     task: "",
     description: "",
-    status: "todo",
+    status: "backlog",
     user: currentUser.email,
     deadline: new Date().toISOString().split("T")[0],
     tags: [],
@@ -100,7 +100,7 @@ const TodoForm = ({ tags }) => {
           className="w-full flex-1 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"
         />
 
-        <div className="flex flex-row gap-3 items-center mt-5">
+        <div className="flex flex-row gap-3 items-center mt-1">
           {tags.map((tag) => (
             <Tag
               key={tag.id}
