@@ -99,23 +99,7 @@ const TodoForm = ({ tags }) => {
           onChange={handleChange}
           className="w-full flex-1 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"
         />
-        <div className="flex flex-row gap-3 items-center">
-          <input
-            type="text"
-            value={category}
-            onChange={(e) => {
-              setCategory(e.target.value)
-            }}
-            placeholder="Add a new label or select from bellow"
-            className="w-full flex-1 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"
-          />
-          <button
-            className="h-full bg-indigo-600 text-white rounded-lg px-3 py-2 font-bold"
-            onClick={addTag}
-          >
-            + Add Label
-          </button>
-        </div>
+
         <div className="flex flex-row gap-3 items-center mt-5">
           {tags.map((tag) => (
             <Tag
@@ -132,6 +116,23 @@ const TodoForm = ({ tags }) => {
         >
           + Add Todo
         </button>
+        <div className="flex flex-row gap-3 items-center">
+          <input
+            type="text"
+            value={category}
+            onChange={(e) => {
+              setCategory(e.target.value)
+            }}
+            placeholder="Add a new label to the list or select from bellow"
+            className="w-full flex-1 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg transition duration-300"
+          />
+          <button
+            className="h-full bg-indigo-600 text-white rounded-lg px-3 py-2 font-bold"
+            onClick={addTag}
+          >
+            + Add label
+          </button>
+        </div>
       </div>
     </div>
   )
