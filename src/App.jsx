@@ -30,14 +30,9 @@ function App() {
     <AuthProvider>
       <div className="flex flex-col min-h-screen w-full">
         <Header />
-
-        {/* Main Content */}
         <main className="w-full flex flex-col flex-1 h-full">
           {routesElement}
         </main>
-
-        {/* Proper Footer */}
-        <footer>Footer</footer>
       </div>
     </AuthProvider>
   )
