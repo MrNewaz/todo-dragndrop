@@ -1,5 +1,7 @@
 import { useRoutes } from "react-router-dom"
+import { AuthProvider } from "./contexts/authContext"
 import Home from "./pages/Home"
+import Login from "./pages/Login"
 
 function App() {
   const routesArray = [
@@ -7,21 +9,27 @@ function App() {
       path: "/",
       element: <Home />,
     },
+    {
+      path: "/login",
+      element: <Login />,
+    },
   ]
   let routesElement = useRoutes(routesArray)
   return (
-    <div className="flex flex-col min-h-screen w-full">
-      {/* Proper Header */}
-      <header>Header</header>
+    <AuthProvider>
+      <div className="flex flex-col min-h-screen w-full">
+        {/* Proper Header */}
+        <header>Header</header>
 
-      {/* Main Content */}
-      <main className="w-full flex flex-col flex-1 h-full">
-        {routesElement}
-      </main>
+        {/* Main Content */}
+        <main className="w-full flex flex-col flex-1 h-full">
+          {routesElement}
+        </main>
 
-      {/* Proper Footer */}
-      <footer>Footer</footer>
-    </div>
+        {/* Proper Footer */}
+        <footer>Footer</footer>
+      </div>
+    </AuthProvider>
   )
 }
 
