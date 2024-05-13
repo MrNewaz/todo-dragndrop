@@ -1,4 +1,5 @@
 import { useRoutes } from "react-router-dom"
+import Header from "./components/header"
 import { AuthProvider } from "./contexts/authContext"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
@@ -28,8 +29,7 @@ function App() {
   return (
     <AuthProvider>
       <div className="flex flex-col min-h-screen w-full">
-        {/* Proper Header */}
-        <header>Header</header>
+        <Header />
 
         {/* Main Content */}
         <main className="w-full flex flex-col flex-1 h-full">
