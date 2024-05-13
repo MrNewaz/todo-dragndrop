@@ -1,7 +1,8 @@
 import React from "react"
-import DropArea from "../Drag/DropArea"
-import EmptyDropArea from "../Drag/EmptyDropArea"
-import TaskCard from "./TodoCard"
+
+import DropArea from "../DropArea/DropArea"
+import EmptyDropArea from "../DropArea/EmptyDropArea"
+import TodoCard from "./TodoCard"
 
 const TodoColumn = ({
   title,
@@ -25,7 +26,7 @@ const TodoColumn = ({
         (task) =>
           task.status === status && (
             <React.Fragment key={task.id}>
-              <TaskCard
+              <TodoCard
                 key={task.id}
                 task={task}
                 handleDelete={handleDelete}

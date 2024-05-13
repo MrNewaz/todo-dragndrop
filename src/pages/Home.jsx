@@ -9,6 +9,7 @@ import {
 } from "firebase/firestore"
 import { useEffect, useState } from "react"
 import TodoForm from "../components/TodoForm"
+import TodoColumn from "../components/TodoList/TodoColumn"
 import { db } from "../firebase/config"
 import useAuth from "../hooks/useAuth"
 
@@ -64,7 +65,6 @@ const Home = () => {
       <section className="grid grid-cols-3 gap-5">
         <TodoColumn
           title="To do"
-          // icon={todoIcon}
           tasks={todos}
           status="todo"
           handleDelete={deleteTodo}
@@ -73,7 +73,6 @@ const Home = () => {
         />
         <TodoColumn
           title="Doing"
-          // icon={doingIcon}
           tasks={todos}
           status="doing"
           handleDelete={deleteTodo}
@@ -82,7 +81,6 @@ const Home = () => {
         />
         <TodoColumn
           title="Done"
-          // icon={doneIcon}
           tasks={todos}
           status="done"
           handleDelete={deleteTodo}

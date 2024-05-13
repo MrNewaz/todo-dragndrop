@@ -1,12 +1,9 @@
 import { doc, updateDoc } from "firebase/firestore"
 import { useState } from "react"
-import deleteIcon from "../../assets/delete.png"
+import { db } from "../../firebase/config"
+import Tag from "../TodoForm/Tag"
 
-import { db } from "../../firebase/firebase"
-import Tag from "../CategoryForm/Tag"
-// import "./TaskCard.css"
-
-const TaskCard = ({ task, handleDelete, setActiveCard }) => {
+const TodoCard = ({ task, handleDelete, setActiveCard }) => {
   const [isEditing, setIsEditing] = useState({
     value: false,
     id: null,
@@ -158,7 +155,7 @@ const TaskCard = ({ task, handleDelete, setActiveCard }) => {
               className="h-full bg-indigo-600 text-white rounded-lg px-3 py-2 font-bold"
               onClick={() => handleDelete(task.id)}
             >
-              <img src={deleteIcon} className="h-5" alt="" />
+              <p>Delete</p>
             </button>
             <button
               className="h-full bg-indigo-600 text-white rounded-lg px-3 py-2 font-bold"
@@ -173,4 +170,4 @@ const TaskCard = ({ task, handleDelete, setActiveCard }) => {
   )
 }
 
-export default TaskCard
+export default TodoCard
