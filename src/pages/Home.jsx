@@ -1,4 +1,12 @@
-import { collection, onSnapshot, query, where } from "firebase/firestore"
+import {
+  collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore"
 import { useEffect, useState } from "react"
 import TodoForm from "../components/TodoForm"
 import { db } from "../firebase/config"
@@ -31,9 +39,57 @@ const Home = () => {
     }
   }, [currentUser])
 
+  const deleteTodo = async (id) => {
+    try {
+      const todoDocRef = doc(db, "todos", id)
+      await deleteDoc(todoDocRef)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const onDrop = async (status, position) => {
+    console.log(status, position)
+    if (activeCard == null || activeCard === undefined) return
+    try {
+      const todoDocRef = doc(db, "todos", activeCard.id)
+      await updateDoc(todoDocRef, { ...activeCard, status: status })
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <main className="p-5 w-full flex flex-col">
       <TodoForm tags={tags} />
+      <section className="grid grid-cols-3 gap-5">
+        <TodoColumn
+          title="To do"
+          // icon={todoIcon}
+          tasks={todos}
+          status="todo"
+          handleDelete={deleteTodo}
+          setActiveCard={setActiveCard}
+          onDrop={onDrop}
+        />
+        <TodoColumn
+          title="Doing"
+          // icon={doingIcon}
+          tasks={todos}
+          status="doing"
+          handleDelete={deleteTodo}
+          setActiveCard={setActiveCard}
+          onDrop={onDrop}
+        />
+        <TodoColumn
+          title="Done"
+          // icon={doneIcon}
+          tasks={todos}
+          status="done"
+          handleDelete={deleteTodo}
+          setActiveCard={setActiveCard}
+          onDrop={onDrop}
+        />
+      </section>
     </main>
   )
 }
