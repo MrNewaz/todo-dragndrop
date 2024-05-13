@@ -7,11 +7,7 @@ import {
 import { auth } from "./config"
 
 export const doCreateUserWithEmailAndPassword = async (email, password) => {
-  return createUserWithEmailAndPassword(auth, email, password).catch(
-    (error) => {
-      console.log(error)
-    }
-  )
+  return createUserWithEmailAndPassword(auth, email, password)
 }
 
 export const doSignInWithEmailAndPassword = (email, password) => {
