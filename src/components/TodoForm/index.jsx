@@ -44,7 +44,6 @@ const TodoForm = ({ tags }) => {
   }
 
   const addTodo = async () => {
-    console.log(taskData)
     if (!taskData.task) return
     try {
       await addDoc(collection(db, "todos"), taskData)
@@ -71,8 +70,7 @@ const TodoForm = ({ tags }) => {
       console.log(e)
     }
   }
-
-  console.log(taskData)
+  
   return (
     <div>
       <div className="gap-5 flex flex-col">

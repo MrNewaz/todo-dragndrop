@@ -26,7 +26,6 @@ const Login = () => {
           setIsSigningIn(false)
           setErrorMessage(err.message)
         })
-      // doSendEmailVerification()
     }
   }
 

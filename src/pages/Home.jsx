@@ -16,7 +16,6 @@ import useAuth from "../hooks/useAuth"
 const Home = () => {
   const { currentUser } = useAuth()
   const [todos, setTodos] = useState([])
-  // const [tasks, setTasks] = useState(JSON.parse(oldTasks) || [])
   const [activeCard, setActiveCard] = useState(null)
   const [tags, setTags] = useState([])
 
@@ -49,8 +48,7 @@ const Home = () => {
     }
   }
 
-  const onDrop = async (status, position) => {
-    console.log(status, position)
+  const onDrop = async (status) => {
     if (activeCard == null || activeCard === undefined) return
     try {
       const todoDocRef = doc(db, "todos", activeCard.id)

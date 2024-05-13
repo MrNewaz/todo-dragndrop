@@ -34,7 +34,7 @@ const TodoColumn = ({
                 handleDelete={handleDelete}
                 setActiveCard={setActiveCard}
               />
-              <DropArea onDrop={() => onDrop(status, task.id)} />
+              <DropArea onDrop={() => onDrop(status)} />
             </React.Fragment>
           )
       )}
