@@ -1,12 +1,12 @@
-import { addDoc, collection } from "firebase/firestore"
 import { useState } from "react"
 
-import { db } from "../../firebase/config"
+import { addTag, addTodo } from "../../firebase/database"
 import useAuth from "../../hooks/useAuth"
 import Tag from "./Tag"
 
 const TodoForm = ({ tags }) => {
   const { currentUser } = useAuth()
+
   const [taskData, setTaskData] = useState({
     task: "",
     description: "",
@@ -43,34 +43,6 @@ const TodoForm = ({ tags }) => {
     })
   }
 
-  const addTodo = async () => {
-    if (!taskData.task) return
-    try {
-      await addDoc(collection(db, "todos"), taskData)
-      setTaskData({
-        id: "",
-        task: "",
-        description: "",
-        user: currentUser.email,
-        deadline: new Date().toISOString().split("T")[0],
-        status: "backlog",
-        tags: [],
-      })
-    } catch (e) {
-      console.log(e)
-    }
-  }
-
-  const addTag = async () => {
-    if (!category) return
-    try {
-      await addDoc(collection(db, "tags"), { tag: category })
-      setCategory("")
-    } catch (e) {
-      console.log(e)
-    }
-  }
-  
   return (
     <div>
       <div className="gap-5 flex flex-col">
@@ -110,7 +82,7 @@ const TodoForm = ({ tags }) => {
         </div>
         <button
           className="h-full bg-indigo-600 text-white rounded-lg px-3 py-2 font-bold"
-          onClick={addTodo}
+          onClick={() => addTodo(taskData, setTaskData, currentUser)}
         >
           + Add Todo
         </button>
@@ -126,7 +98,7 @@ const TodoForm = ({ tags }) => {
           />
           <button
             className="h-full bg-indigo-600 text-white rounded-lg px-3 py-2 font-bold"
-            onClick={addTag}
+            onClick={() => addTag(category, setCategory)}
           >
             + Add label
           </button>

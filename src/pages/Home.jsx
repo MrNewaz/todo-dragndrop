@@ -1,17 +1,10 @@
-import {
-  collection,
-  deleteDoc,
-  doc,
-  onSnapshot,
-  query,
-  updateDoc,
-  where,
-} from "firebase/firestore"
-import { useEffect, useState } from "react"
+import { doc, updateDoc } from "firebase/firestore"
+import { useState } from "react"
 import TodoForm from "../components/TodoForm"
 import TodoColumn from "../components/TodoList/TodoColumn"
 import { db } from "../firebase/config"
 import useAuth from "../hooks/useAuth"
+import useFetchTodos from "../hooks/useFetchTodos"
 
 const Home = () => {
   const { currentUser } = useAuth()
@@ -19,34 +12,7 @@ const Home = () => {
   const [activeCard, setActiveCard] = useState(null)
   const [tags, setTags] = useState([])
 
-  useEffect(() => {
-    const todosQuery = query(
-      collection(db, "todos"),
-      where("user", "==", currentUser.email)
-    )
-    const unsubscribeTodo = onSnapshot(todosQuery, (snapshot) => {
-      setTodos(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-    })
-
-    const tagsRef = collection(db, "tags")
-
-    const unsubscribeTags = onSnapshot(tagsRef, (snapshot) => {
-      setTags(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
-    })
-    return () => {
-      unsubscribeTodo()
-      unsubscribeTags()
-    }
-  }, [currentUser])
-
-  const deleteTodo = async (id) => {
-    try {
-      const todoDocRef = doc(db, "todos", id)
-      await deleteDoc(todoDocRef)
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  useFetchTodos(currentUser, setTodos, setTags)
 
   const onDrop = async (status) => {
     if (activeCard == null || activeCard === undefined) return
@@ -65,7 +31,6 @@ const Home = () => {
           title="Backlog"
           tasks={todos}
           status="backlog"
-          handleDelete={deleteTodo}
           setActiveCard={setActiveCard}
           onDrop={onDrop}
         />
@@ -73,7 +38,6 @@ const Home = () => {
           title="In Progress"
           tasks={todos}
           status="in progress"
-          handleDelete={deleteTodo}
           setActiveCard={setActiveCard}
           onDrop={onDrop}
         />
@@ -81,7 +45,6 @@ const Home = () => {
           title="Completed"
           tasks={todos}
           status="completed"
-          handleDelete={deleteTodo}
           setActiveCard={setActiveCard}
           onDrop={onDrop}
         />

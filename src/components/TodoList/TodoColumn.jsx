@@ -4,14 +4,7 @@ import DropArea from "../DropArea/DropArea"
 import EmptyDropArea from "../DropArea/EmptyDropArea"
 import TodoCard from "./TodoCard"
 
-const TodoColumn = ({
-  title,
-  tasks,
-  status,
-  handleDelete,
-  setActiveCard,
-  onDrop,
-}) => {
+const TodoColumn = ({ title, tasks, status, setActiveCard, onDrop }) => {
   const filteredTasks = tasks.filter((task) => task.status == status).length
   return (
     <div className="py-5">
@@ -31,7 +24,6 @@ const TodoColumn = ({
               <TodoCard
                 key={task.id}
                 task={task}
-                handleDelete={handleDelete}
                 setActiveCard={setActiveCard}
               />
               <DropArea onDrop={() => onDrop(status)} />

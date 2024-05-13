@@ -1,9 +1,10 @@
 import { doc, updateDoc } from "firebase/firestore"
 import { useState } from "react"
 import { db } from "../../firebase/config"
+import { deleteTodo } from "../../firebase/database"
 import Tag from "../TodoForm/Tag"
 
-const TodoCard = ({ task, handleDelete, setActiveCard }) => {
+const TodoCard = ({ task, setActiveCard }) => {
   const [isEditing, setIsEditing] = useState({
     value: false,
     id: null,
@@ -147,7 +148,7 @@ const TodoCard = ({ task, handleDelete, setActiveCard }) => {
             </button>
             <button
               className="h-full flex-1 bg-red-600 text-white rounded-lg px-3 py-2 font-bold"
-              onClick={() => handleDelete(task.id)}
+              onClick={() => deleteTodo(task.id)}
             >
               <p>Delete</p>
             </button>
