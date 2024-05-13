@@ -64,25 +64,25 @@ const Home = () => {
       <TodoForm tags={tags} />
       <section className="grid grid-cols-3 gap-5">
         <TodoColumn
-          title="To do"
+          title="Backlog"
           tasks={todos}
-          status="todo"
+          status="backlog"
           handleDelete={deleteTodo}
           setActiveCard={setActiveCard}
           onDrop={onDrop}
         />
         <TodoColumn
-          title="Doing"
+          title="In Progress"
           tasks={todos}
-          status="doing"
+          status="in progress"
           handleDelete={deleteTodo}
           setActiveCard={setActiveCard}
           onDrop={onDrop}
         />
         <TodoColumn
-          title="Done"
+          title="Completed"
           tasks={todos}
-          status="done"
+          status="completed"
           handleDelete={deleteTodo}
           setActiveCard={setActiveCard}
           onDrop={onDrop}

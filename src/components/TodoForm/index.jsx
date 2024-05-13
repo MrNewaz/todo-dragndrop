@@ -54,7 +54,7 @@ const TodoForm = ({ tags }) => {
         description: "",
         user: currentUser.email,
         deadline: new Date().toISOString().split("T")[0],
-        status: "todo",
+        status: "backlog",
         tags: [],
       })
     } catch (e) {
