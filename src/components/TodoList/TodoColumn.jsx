@@ -15,7 +15,9 @@ const TodoColumn = ({
   const filteredTasks = tasks.filter((task) => task.status == status).length
   return (
     <div className="py-5">
-      <h2 className="text-center text-xl">{title}</h2>
+      <h2 className="text-center text-xl bg-slate-200 p-1 rounded-lg">
+        {title}
+      </h2>
       {filteredTasks === 0 ? (
         <EmptyDropArea onDrop={() => onDrop(status)} />
       ) : (

@@ -118,7 +118,10 @@ const TodoCard = ({ task, handleDelete, setActiveCard }) => {
                 <Tag key={index} tagName={tag} selected />
               ))}
             </div>
-            <button className="h-5 w-5" onClick={updateTodo}>
+            <button
+              className="h-full bg-indigo-600 text-white rounded-lg px-3 py-2 font-bold"
+              onClick={updateTodo}
+            >
               <p>update</p>
             </button>
           </div>
